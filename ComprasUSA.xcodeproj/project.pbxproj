@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		157A2CFA2B68574300688AB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 157A2CF92B68574300688AB3 /* Assets.xcassets */; };
 		157A2CFC2B68576200688AB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 157A2CFB2B68576200688AB3 /* Preview Assets.xcassets */; };
+		157A2D1B2B685AAC00688AB3 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157A2D1A2B685AAC00688AB3 /* Product.swift */; };
 		C81E68712B649332005A8B9F /* ComprasUSAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E68702B649332005A8B9F /* ComprasUSAApp.swift */; };
 		C81E687F2B649712005A8B9F /* ShoppingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E687E2B649712005A8B9F /* ShoppingListView.swift */; };
 		C81E68812B649DBA005A8B9F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81E68802B649DB9005A8B9F /* MainView.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		157A2CF92B68574300688AB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		157A2CFB2B68576200688AB3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		157A2D1A2B685AAC00688AB3 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		C81E686D2B649332005A8B9F /* ComprasUSA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComprasUSA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C81E68702B649332005A8B9F /* ComprasUSAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprasUSAApp.swift; sourceTree = "<group>"; };
 		C81E687E2B649712005A8B9F /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
@@ -40,6 +42,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		157A2D192B685A5000688AB3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				157A2D1A2B685AAC00688AB3 /* Product.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C81E68642B649332005A8B9F = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +69,7 @@
 		C81E686F2B649332005A8B9F /* ComprasUSA */ = {
 			isa = PBXGroup;
 			children = (
+				157A2D192B685A5000688AB3 /* Models */,
 				157A2CF92B68574300688AB3 /* Assets.xcassets */,
 				C81E68882B66E1BA005A8B9F /* Views */,
 				C81E68702B649332005A8B9F /* ComprasUSAApp.swift */,
@@ -163,6 +174,7 @@
 				C81E687F2B649712005A8B9F /* ShoppingListView.swift in Sources */,
 				C81E68812B649DBA005A8B9F /* MainView.swift in Sources */,
 				C81E68712B649332005A8B9F /* ComprasUSAApp.swift in Sources */,
+				157A2D1B2B685AAC00688AB3 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
