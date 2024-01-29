@@ -8,17 +8,29 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var dolarExchange: Decimal = 0
-    @State private var iof: Decimal = 0
+    
+    @AppStorage("dolarExchange", store: .standard) var dolarExchange: Double = 0.0
+    @AppStorage("iof", store: .standard) var iof: Double = 0.0
     
     var body: some View {
-        NavigationView{
-            Form{
-                Section("Cotação do dólar (R$)"){
-                    TextField(" ", value: $dolarExchange, format: .number)
+        NavigationView {
+            Form {
+                Section("Cotação do dólar (R$)") {
+                    TextField(
+                        " ",
+                        value: $dolarExchange,
+                        format: .number
+                    )
+                    .keyboardType(.decimalPad)
                 }
-                Section("IOF (%)"){
-                    TextField(" ", value: $iof, format: .number)
+                
+                Section("IOF (%)") {
+                    TextField(
+                        " ",
+                        value: $iof,
+                        format: .number
+                    )
+                    .keyboardType(.decimalPad)
                 }
             }
             .navigationTitle("Ajustes")

@@ -10,11 +10,18 @@ import SwiftData
 
 @Model
 final class Product {
-    var name: String
-    var price: Double
     
-    init(name: String, price: Double) {
+    var name: String
+    var tax: Int
+    var price: Double
+    var isPaidWithCreditCard: Bool
+    var photo: String
+    
+    init(name: String, tax: Int, price: Double, isPaidWithCreditCard: Bool, photo: String) {
         self.name = name
+        self.tax = tax
         self.price = price
+        self.isPaidWithCreditCard = isPaidWithCreditCard
+        self.photo = photo
     }
 }
