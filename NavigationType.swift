@@ -8,5 +8,5 @@
 import Foundation
 
 enum NavigationType: Hashable {
-    case form
+    case form(Product?)
 }

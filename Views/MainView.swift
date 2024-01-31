@@ -29,8 +29,8 @@ struct MainView: View {
             }
             .navigationDestination(for: NavigationType.self) { type in
                 switch type {
-                case .form:
-                    ShoppingFormView(path: $path)
+                case .form(let product):
+                    ShoppingFormView(path: $path, product: product)
                 }
             }
         }

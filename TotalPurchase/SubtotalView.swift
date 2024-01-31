@@ -5,15 +5,19 @@
 //  Created by Vinícius Taparosky on 27/01/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct SubtotalView: View {
+    
+    @Query var products: [Product]
+    
     var body: some View {
         NavigationView{
             Group{
                 VStack{
                     Text("Valor dos produtos ($)")
-                    Text("$ 1,200.00")
+                    Text("$ \(totalPrices())")
                         .font(.largeTitle)
                         .foregroundStyle(.blue)
                         .fontWeight(.bold)
@@ -43,6 +47,16 @@ struct SubtotalView: View {
             }
             .navigationTitle("Resumo da compra")
         }
+    }
+    
+    fileprivate func totalPrices() -> Double {
+        var totalPrices: Double = 0.0
+        
+        for product in products {
+            totalPrices += product.price
+        }
+        
+        return totalPrices
     }
 }
 

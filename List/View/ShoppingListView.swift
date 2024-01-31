@@ -5,13 +5,15 @@
 //  Created by Vinícius Taparosky on 26/01/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ShoppingListView: View {
     
-    fileprivate var viewModel: ShoppingListViewModel = ShoppingListViewModel()
+    @Environment(\.modelContext) private var modelContext
     
     @Binding var path: NavigationPath
+    @Query var products: [Product]
     
     init(path: Binding<NavigationPath>) {
         _path = path
@@ -27,7 +29,7 @@ struct ShoppingListView: View {
             .navigationTitle("Lista de Compras")
             .toolbar{
                 Button("", systemImage: "plus"){
-                    path.append(NavigationType.form)
+                    path.append(NavigationType.form(nil))
                 }
             }
         }
@@ -35,12 +37,12 @@ struct ShoppingListView: View {
     
     var content: some View {
         List {
-            ForEach(viewModel.products) {_ in 
+            ForEach(products) { product in
                 HStack{
                     Button(action: {
-                        path.append(NavigationType.form)
+                        path.append(NavigationType.form(product))
                     }, label: {
-                        Text("Imagem produto")
+                        Text("\(product.name)")
                     })
                     
                     Spacer()
@@ -53,9 +55,15 @@ struct ShoppingListView: View {
                     
                 }
             }
-            .onDelete(perform: { indexSet in
-                print(indexSet)
-            })
+            .onDelete(perform: deleteItems)
+        }
+    }
+    
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(products[index])
+            }
         }
     }
 }
