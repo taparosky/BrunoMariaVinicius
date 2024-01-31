@@ -9,6 +9,9 @@ import SwiftUI
 import PhotosUI
 
 struct ShoppingFormView: View {
+    
+    @Binding var path: NavigationPath
+    
     @State var product: String = ""
     @State var tax: Decimal = 0
     @State var price: Decimal = 0
@@ -61,7 +64,7 @@ struct ShoppingFormView: View {
     
     var saveButton: some View {
         Button{
-            
+            path.removeLast()
         } label: {
             Text("Cadastrar")
                 .padding(.vertical, 6)
@@ -75,5 +78,5 @@ struct ShoppingFormView: View {
 }
 
 #Preview {
-    ShoppingFormView()
+    ShoppingFormView(path: .constant(NavigationPath()))
 }
