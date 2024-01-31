@@ -9,12 +9,19 @@ import SwiftUI
 import PhotosUI
 
 struct ShoppingFormView: View {
-    @State var product: String = ""
-    @State var tax: Decimal = 0
-    @State var price: Decimal = 0
+    
+    @Environment(\.modelContext) private var modelContext
+    
+    @Binding var path: NavigationPath
+    
+    @State var productName: String = ""
+    @State var tax: Double = 0
+    @State var price: Double = 0
     @State var card: Bool = false
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var photoImageData: Data?
+    
+    var product: Product?
     
     var body: some View {
         NavigationView{
@@ -29,9 +36,9 @@ struct ShoppingFormView: View {
     }
     
     var form: some View{
-        Form{
+        Form {
             Section("Nome do produto") {
-                TextField("Escreva o nome do produto", text: $product)
+                TextField("Escreva o nome do produto", text: $productName)
             }
             
             Section("Imposto do estado (%)") {
@@ -54,16 +61,37 @@ struct ShoppingFormView: View {
                     Label("Escolher foto", systemImage: "giftcard.fill")
                 }
             }
-            
-            
+        }
+        .onAppear {
+            if let product {
+                productName = product.name
+                tax = product.tax
+                price = product.price
+                card = product.isPaidWithCreditCard
+            }
         }
     }
     
     var saveButton: some View {
         Button{
+            if let product {
+                product.name = productName
+                product.tax = tax
+                product.price = price
+                product.isPaidWithCreditCard = card
+            } else {
+                modelContext.insert(Product(
+                    name: productName,
+                    tax: tax,
+                    price: price,
+                    isPaidWithCreditCard: card,
+                    photo: ""
+                ))
+            }
             
+            path.removeLast()
         } label: {
-            Text("Cadastrar")
+            Text(product == nil ? "Cadastrar" : "Atualizar")
                 .padding(.vertical, 6)
                 .frame(maxWidth: .infinity)
         }
@@ -75,5 +103,5 @@ struct ShoppingFormView: View {
 }
 
 #Preview {
-    ShoppingFormView()
+    ShoppingFormView(path: .constant(NavigationPath()))
 }

@@ -8,26 +8,47 @@
 import SwiftUI
 
 struct MainView: View {
+
+    @State private var path = NavigationPath()
+    
     var body: some View {
-        tab
-    }
-    
-    var tab: some View {
-        TabView{
-            ShoppingListView()
-                .tabItem {
-                    Label("Compras", systemImage: "cart.circle.fill")
+        
+        NavigationStack(path: $path) {
+            TabView{
+                ShoppingListView(path: $path)
+                    .tabItem {
+                        Label("Compras", systemImage: "cart.circle.fill")
+                    }
+                SettingsView()
+                    .tabItem {
+                        Label("Ajustes", systemImage: "gear.circle.fill")
+                    }
+                SubtotalView()
+                    .tabItem {
+                        Label("Total da compra", systemImage: "dollarsign.circle.fill" )}
+            }
+            .navigationDestination(for: NavigationType.self) { type in
+                switch type {
+                case .form(let product):
+                    ShoppingFormView(path: $path, product: product)
                 }
-            SettingsView()
-                .tabItem {
-                    Label("Ajustes", systemImage: "gear.circle.fill")
-                }
-            SubtotalView()
-                .tabItem {
-                    Label("Total da compra", systemImage: "dollarsign.circle.fill" )}
+            }
         }
+        
+//        TabView{
+//            ShoppingListView()
+//                .tabItem {
+//                    Label("Compras", systemImage: "cart.circle.fill")
+//                }
+//            SettingsView()
+//                .tabItem {
+//                    Label("Ajustes", systemImage: "gear.circle.fill")
+//                }
+//            SubtotalView()
+//                .tabItem {
+//                    Label("Total da compra", systemImage: "dollarsign.circle.fill" )}
+//        }
     }
-    
 }
 
 
