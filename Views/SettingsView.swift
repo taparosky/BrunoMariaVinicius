@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @AppStorage("dolarExchange", store: .standard) var dolarExchange: Double = 0.0
-    @AppStorage("iof", store: .standard) var iof: Double = 0.0
+    @AppStorage("dolarExchange", store: .standard) var dolarExchange: Double = 4.9
+    @AppStorage("iof", store: .standard) var iof: Double = 5.38
     
     var body: some View {
         NavigationView {
@@ -22,6 +22,7 @@ struct SettingsView: View {
                         format: .number
                     )
                     .keyboardType(.decimalPad)
+                
                 }
                 
                 Section("IOF (%)") {
