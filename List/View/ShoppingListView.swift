@@ -23,7 +23,12 @@ struct ShoppingListView: View {
         NavigationView{
             Group{
                 ZStack {
-                    content
+                    if products.isEmpty {
+                        Text("Sua lista de compras está vazia")
+                            .italic()
+                    } else {
+                        content
+                    }
                 }
             }
             .navigationTitle("Lista de Compras")
@@ -38,21 +43,27 @@ struct ShoppingListView: View {
     var content: some View {
         List {
             ForEach(products) { product in
-                HStack{
-                    Button(action: {
-                        path.append(NavigationType.form(product))
-                    }, label: {
-                        Text("\(product.name)")
-                    })
+                HStack(spacing: 10) {
+                    if let image = UIImage(data: product.photo) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
+                    }
                     
                     Spacer()
                     
-                    Text("Nome produto")
-                    
+                    Text("\(product.name)")
+                                        
+                    Text("\(product.price)")
+
                     Spacer()
                     
-                    Text("Preço")
-                    
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(Color.gray)
+                }
+                .onTapGesture {
+                    path.append(NavigationType.form(product))
                 }
             }
             .onDelete(perform: deleteItems)

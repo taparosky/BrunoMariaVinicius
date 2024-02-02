@@ -11,15 +11,17 @@ import PhotosUI
 struct ShoppingFormView: View {
     
     @Environment(\.modelContext) private var modelContext
-    
     @Binding var path: NavigationPath
-    
+    @State private var showingAlert: Bool = false
+    @State private var alertMsg = ""
     @State var productName: String = ""
-    @State var tax: Double = 0
-    @State var price: Double = 0
+    @State var tax: Double = 0.0
+    @State var price: Double = 0.0
     @State var card: Bool = false
     @State private var selectedPhoto: PhotosPickerItem?
-    @State private var photoImageData: Data?
+    @State private var selectedPhotoData: Data?
+    @State private var image: Image?
+    
     
     var product: Product?
     
@@ -29,6 +31,9 @@ struct ShoppingFormView: View {
                 VStack{
                     form
                     saveButton
+                }
+                .alert("\(alertMsg)", isPresented: $showingAlert) {
+                    Button("OK", role: .cancel) { }
                 }
             }
             .navigationTitle("Cadastro de produto")
@@ -43,10 +48,12 @@ struct ShoppingFormView: View {
             
             Section("Imposto do estado (%)") {
                 TextField("0", value: $tax, format: .number)
+                    .keyboardType(.numberPad)
             }
             
             Section("Valor do produto (U$)") {
                 TextField("0", value: $price, format: .number)
+                    .keyboardType(.decimalPad)
             }
             
             Section("Meio de pagamento") {
@@ -56,9 +63,24 @@ struct ShoppingFormView: View {
             }
             
             Section("Foto") {
-                PhotosPicker(selection: $selectedPhoto, matching: .images)
-                {
+                PhotosPicker(selection: $selectedPhoto, matching: .images) {
                     Label("Escolher foto", systemImage: "giftcard.fill")
+                }
+                
+                image?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300, height: 300)
+            }
+            .onChange(of: selectedPhoto) {
+                Task {
+                    if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
+                        selectedPhotoData = data
+                        
+                        if let img = UIImage(data: data) {
+                            image = Image(uiImage: img)
+                        }
+                    }
                 }
             }
         }
@@ -68,6 +90,11 @@ struct ShoppingFormView: View {
                 tax = product.tax
                 price = product.price
                 card = product.isPaidWithCreditCard
+                selectedPhotoData = product.photo
+                
+                if let img = UIImage(data: product.photo) {
+                    image = Image(uiImage: img)
+                }
             }
         }
     }
@@ -75,21 +102,56 @@ struct ShoppingFormView: View {
     var saveButton: some View {
         Button{
             if let product {
-                product.name = productName
-                product.tax = tax
-                product.price = price
-                product.isPaidWithCreditCard = card
+                if productName.isEmpty {
+                    alertMsg = "Informe o nome do produto"
+                    showingAlert.toggle()
+                } else if tax <= 0 {
+                    alertMsg = "Informe o imposto do Estado"
+                    showingAlert.toggle()
+                } else if price <= 0 {
+                    alertMsg = "Informe o preço do produto"
+                    showingAlert.toggle()
+                } else if selectedPhotoData == nil {
+                    alertMsg = "Selecione uma foto do produto"
+                    showingAlert.toggle()
+                } else {
+                    if let photoData = selectedPhotoData {
+                        product.name = productName
+                        product.tax = tax
+                        product.price = price
+                        product.isPaidWithCreditCard = card
+                        product.photo = photoData
+                    }
+                    
+                    path.removeLast()
+                }
             } else {
-                modelContext.insert(Product(
-                    name: productName,
-                    tax: tax,
-                    price: price,
-                    isPaidWithCreditCard: card,
-                    photo: ""
-                ))
+                if productName.isEmpty {
+                    alertMsg = "Informe o nome do produto"
+                    showingAlert.toggle()
+                } else if tax <= 0 {
+                    alertMsg = "Informe o imposto do Estado"
+                    showingAlert.toggle()
+                } else if price <= 0 {
+                    alertMsg = "Informe o preço do produto"
+                    showingAlert.toggle()
+                } else if selectedPhotoData == nil {
+                    alertMsg = "Selecione uma foto do produto"
+                    showingAlert.toggle()
+                } else {
+                    if let photoData = selectedPhotoData {
+                        modelContext.insert(Product(
+                            name: productName,
+                            tax: tax,
+                            price: price,
+                            isPaidWithCreditCard: card,
+                            photo: photoData
+                        ))
+                    }
+                    
+                    path.removeLast()
+                }
             }
-            
-            path.removeLast()
         } label: {
             Text(product == nil ? "Cadastrar" : "Atualizar")
                 .padding(.vertical, 6)

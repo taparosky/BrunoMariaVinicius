@@ -8,16 +8,15 @@
 import Foundation
 import SwiftData
 
-@Model
-final class Product {
+@Model final class Product {
     
     var name: String
     var tax: Double
     var price: Double
     var isPaidWithCreditCard: Bool
-    var photo: String
+    @Attribute(.externalStorage) var photo: Data
     
-    init(name: String, tax: Double, price: Double, isPaidWithCreditCard: Bool, photo: String) {
+    init(name: String, tax: Double, price: Double, isPaidWithCreditCard: Bool, photo: Data) {
         self.name = name
         self.tax = tax
         self.price = price
