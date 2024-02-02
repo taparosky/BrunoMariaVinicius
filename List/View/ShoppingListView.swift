@@ -11,9 +11,15 @@ import SwiftUI
 struct ShoppingListView: View {
     
     @Environment(\.modelContext) private var modelContext
-    
     @Binding var path: NavigationPath
     @Query var products: [Product]
+    
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en-US")
+        return formatter
+    }()
     
     init(path: Binding<NavigationPath>) {
         _path = path
@@ -54,8 +60,8 @@ struct ShoppingListView: View {
                     Spacer()
                     
                     Text("\(product.name)")
-                                        
-                    Text("\(product.price)")
+
+                    Text(" \(numberFormatter.string(from: NSNumber(floatLiteral: product.price)) ?? "0.0")")
 
                     Spacer()
                     
@@ -69,6 +75,7 @@ struct ShoppingListView: View {
             .onDelete(perform: deleteItems)
         }
     }
+    
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
