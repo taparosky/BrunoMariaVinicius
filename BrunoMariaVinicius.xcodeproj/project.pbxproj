@@ -24,7 +24,7 @@
 		157A2CF92B68574300688AB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		157A2CFB2B68576200688AB3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		157A2D1A2B685AAC00688AB3 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		C81E686D2B649332005A8B9F /* ComprasUSA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComprasUSA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C81E686D2B649332005A8B9F /* BrunoMariaVinicius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrunoMariaVinicius.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C81E68702B649332005A8B9F /* ComprasUSAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprasUSAApp.swift; sourceTree = "<group>"; };
 		C81E687E2B649712005A8B9F /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
 		C81E68802B649DB9005A8B9F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		C81E686E2B649332005A8B9F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C81E686D2B649332005A8B9F /* ComprasUSA.app */,
+				C81E686D2B649332005A8B9F /* BrunoMariaVinicius.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,9 +144,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C81E686C2B649332005A8B9F /* ComprasUSA */ = {
+		C81E686C2B649332005A8B9F /* BrunoMariaVinicius */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C81E687B2B649333005A8B9F /* Build configuration list for PBXNativeTarget "ComprasUSA" */;
+			buildConfigurationList = C81E687B2B649333005A8B9F /* Build configuration list for PBXNativeTarget "BrunoMariaVinicius" */;
 			buildPhases = (
 				C81E68692B649332005A8B9F /* Sources */,
 				C81E686A2B649332005A8B9F /* Frameworks */,
@@ -156,9 +156,9 @@
 			);
 			dependencies = (
 			);
-			name = ComprasUSA;
+			name = BrunoMariaVinicius;
 			productName = ComprasUSA;
-			productReference = C81E686D2B649332005A8B9F /* ComprasUSA.app */;
+			productReference = C81E686D2B649332005A8B9F /* BrunoMariaVinicius.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -176,7 +176,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C81E68682B649332005A8B9F /* Build configuration list for PBXProject "ComprasUSA" */;
+			buildConfigurationList = C81E68682B649332005A8B9F /* Build configuration list for PBXProject "BrunoMariaVinicius" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -189,7 +189,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C81E686C2B649332005A8B9F /* ComprasUSA */,
+				C81E686C2B649332005A8B9F /* BrunoMariaVinicius */,
 			);
 		};
 /* End PBXProject section */
@@ -411,7 +411,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C81E68682B649332005A8B9F /* Build configuration list for PBXProject "ComprasUSA" */ = {
+		C81E68682B649332005A8B9F /* Build configuration list for PBXProject "BrunoMariaVinicius" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C81E68792B649333005A8B9F /* Debug */,
@@ -420,7 +420,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C81E687B2B649333005A8B9F /* Build configuration list for PBXNativeTarget "ComprasUSA" */ = {
+		C81E687B2B649333005A8B9F /* Build configuration list for PBXNativeTarget "BrunoMariaVinicius" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C81E687C2B649333005A8B9F /* Debug */,
